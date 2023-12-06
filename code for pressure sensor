@@ -1,0 +1,28 @@
+import time
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+
+# Define your GPIO pins or I2C address based on the sensor you're using
+# For example, if using GPIO pins:
+sensor_pin = 17
+GPIO.setup(sensor_pin, GPIO.IN)
+
+def read_pressure():
+    # Read pressure data here, either from GPIO or I2C
+
+try:
+    while True:
+        pressure = read_pressure()
+        print(f"Pressure: {pressure} Pa")
+
+        # Check if pressure exceeds the threshold
+        # the threshold values may change accordingly by use cases
+        threshold = 1000  # Set your specific threshold level
+        if pressure < threshold:
+            print("pressure is less")
+
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    GPIO.cleanup()
